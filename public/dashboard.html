@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    
+<h2>Dashboard</h2>
+<div id="dashboard"></div>
+<button onclick="logout()">Logout</button>
+<script>
+    const API  = 'http://localhost:5000/api';
+    // Get token from localStorage
+    const token = localStorage.getItem('token');
+
+    // fetch dasboard data
+    async function loadDashboard(){
+const res = await fetch(`${API}/dashboard`, {
+    headers: { Authorization: `Bearer ${token}`}
+});
+
+const data = await res.json();
+
+const imageTag = data.profileImage
+  ? `<img src="http://localhost:5000/${data.profileImage}" width="150"/>`
+  : '<p> No profile image uploaded</p>';
+
+    document.getElementById('dashboard').innerHTML = `
+      ${imageTag}
+      <p>Username: ${data.username}</p>
+      <p>Role: ${data.role}</p>
+      <p>Balance: ${data.balance}</p>
+      <p>Total Transactions: ${data.totalTransactions}</p>`;
+}
+
+// Logout helper
+function logout() {
+    localStorage.removeItem('token');
+    window.location.href = 'login.html';
+}
+
+loadDashboard();
+</script>
+</body>
+</html>

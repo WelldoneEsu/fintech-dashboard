@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+</head>
+
+<body>
+
+<h2>Make a Transaction</h2> 
+<form id="overrideForm">
+    <input type="text" id="txnId" placeholder="Transaction ID" required />
+    <select id="newType">
+    <option value="">--Leave unchanged--</option>
+    <option value="credit">Credit</option>
+    <option value="debit">Debit</option>
+    </select>
+     <input type="number" id="newAmount" placeholder="New Amount" required />
+    <button type="submit">Overide</button>
+</form>
+
+<script>
+    const API  = 'http://localhost:5000/api';
+    document.getElementById('overrideForm').addEventListener('submit', async (e) => {
+        e.preventDefault(); // prevent page reload
+    
+        const id = document.getElementById('txnId').value;
+        const type = document.getElementById('newType').value;
+        const amount = parseFloat(document.getElementById('newAmount').value);
+
+        const payload = {};
+        if (type) payload.type = type;
+        if (amount) payload.amount = amount;
+
+const res = await fetch(`${API}/admin/transactions/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json',
+    Authorization: `Bearer ${ localStorage.getItem('token')}`
+
+},
+    body: JSON.stringify(payload)
+});
+
+const data = await res.json();
+alert(data.message || 'Override complete');
+
+});
+</script>
+</body>
+</html>

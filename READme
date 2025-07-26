@@ -1,0 +1,56 @@
+# Fintech Dashboard API - Postman Collection
+
+This repository contains the Postman collection for the Fintech Dashboard API, encompassing the login, dashboard, and transactions endpoints. All requests have been tested and confirmed to be working correctly as of July 16, 2025.
+
+## Contents
+
+* Fintech-Dashboard-API.postman_collection.json: The exported Postman collection in v2.1 format.
+
+## How to Use
+
+1.  *Import to Postman:*
+    * Open Postman.
+    * Click "Import" in the top left corner.
+    * Select the Fintech-Dashboard-API.postman_collection.json file.
+2.  *Set Environment Variables (Optional but Recommended):*
+    * If your API base URL or tokens change frequently, consider setting up a Postman Environment with variables like base_url and access_token.
+3.  *Execute Requests:*
+    * *Login:*
+        * Navigate to the "Login" request within the "Fintech Dashboard API" collection.
+        * Update the request body with valid credentials if necessary.
+        * Send the request. Upon successful login, copy the access_token from the response.
+        * If using environment variables: Set the access_token environment variable with the received token.
+    * *Dashboard & Transactions:*
+        * The "Dashboard" and "Transactions" requests are configured to use an Authorization: Bearer token.
+        * Ensure the access_token is correctly set (either manually in the header or via an environment variable) before sending these requests.
+
+# File upload instructions
+
+* File Upload Feature
+✅ Supported Uploads
+Images: .jpg, .jpeg, .png, .gif
+Videos: .mp4, .mov
+Max size: 20MB
+
+* Security Measures
+❌ Scripts and executables are rejected
+✅ Files renamed safely using Date.now() + Math.random()
+✅ .gitignore prevents upload folder from being tracked
+✅ MIME type + extension validation on backend
+
+* Test with Postman
+Method: POST
+URL: http://localhost:5000/api/profile/upload-image or /upload-video
+Body type: form-data
+Key: image/video (type: File)
+Value: Choose a supported file
+
+
+
+
+
+
+
+
+
+

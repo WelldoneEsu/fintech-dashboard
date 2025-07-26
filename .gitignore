@@ -1,0 +1,11 @@
+# Logs
+node_modules
+
+
+
+#ENV
+.env
+
+
+#uploaded images/videos
+uploads/

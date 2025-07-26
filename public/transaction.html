@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction</title>
+</head>
+
+<body>
+
+<h2>Make a Transaction</h2> 
+<form id="txnForm">
+    <select id="type">
+    <option value="credit">Credit</option>
+    <option value="debit">Debit</option>
+    </select>
+     <input type="number" id="amount" placeholder="Amount" required />
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    const API  = 'http://localhost:5000/api';
+    document.getElementById('txnForm').addEventListener('submit', async (e) => {
+        e.preventDefault(); // prevent page reload
+    
+
+        const type = document.getElementById('type').value;
+        const amount = parseFloat(document.getElementById('amount').value);
+
+const res = await fetch(`${API}/transactions`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json',
+    Authorization: `Bearer ${ localStorage.getItem('token')}`
+
+},
+    body: JSON.stringify({ type, amount })
+});
+
+const data = await res.json();
+alert(data.message);
+
+// Redirect to login
+if (res.status === 201) {
+window.location.href = 'dashboard.html';
+}
+});
+</script>
+</body>
+</html>
