@@ -50,6 +50,13 @@ app.use(express.static('public'));
 app.use('/api/profile', profileRoutes);
 app.use('/uploads', express.static('uploads')); // Serve static uplaods
 
+
+// A simple health check route to confirm the API is live
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: "OK" });
+});
+
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api', dashboardRoutes);
