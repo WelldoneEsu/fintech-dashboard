@@ -17,7 +17,10 @@ const { swaggerUi, swaggerSpec } = require('./swagger');
 connectDB();
 
 //only allow frontend from a specific domain
-const allowedOrigins = [ 'http://localhost:5000' ]; // Frontend URL
+const allowedOrigins = [
+    process.env.FRONTEND_URL,
+    'http://localhost:3000',
+    'http://localhost:5000' ]; // Frontend URL
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -29,6 +32,10 @@ app.use(cors({
     },
     credentials: true,
 }));
+
+app.get('/', (req, res) => {
+    res.status(200).json({ message: 'API is running sucessfully'})
+});
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
