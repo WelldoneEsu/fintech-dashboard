@@ -38,7 +38,7 @@ app.use(express.json());
 
 // serve static files
 app.use(express.static('public'));
-n
+
 // For profileImages
 app.use('/api/profile', profileRoutes);
 app.use('/uploads', express.static('uploads')); // Serve static uplaods
