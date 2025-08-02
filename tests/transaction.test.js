@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../app');
-const user = require('../models/User');
+const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 describe('Transaction Routes', () => {
@@ -9,7 +9,8 @@ describe('Transaction Routes', () => {
     beforeEach(async () => {
         const user = await User.create({ username: 'payme', password:'123456',
 balance: 1000 });
-    userId: user._id;
+    userId = user._id;
+
     token = jwt.sign({ id: userId, role: user.role },
 process.env.JWT_SECRET);
     });
@@ -25,7 +26,7 @@ process.env.JWT_SECRET);
             expect(res.body.transaction.amount).toBe(200);       
 });
 
-it('sould not allow debit more than balance', async() => {
+it('should not allow debit more than balance', async() => {
     const res = await request(app)
     .post('/api/transactions')
     .set('Authorization', `Bearer ${token}`)

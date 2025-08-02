@@ -15,10 +15,10 @@ describe('Dashboard Routes', () => {
     it('should return dashboard summary', async () => {
         const res = await request(app)
         .get('/api/dashboard')
-        .set('Authhorization', `Bearer ${token}`);
+        .set('Authorization', `Bearer ${token}`);
 
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty('username', 'dashuser');
-        expect(res.body).tohaveProperty(balance);
+        expect(res.body).tohaveProperty('balance');
     });
 });

@@ -4,10 +4,6 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 let mongo;
 
 beforeAll(async () => {
-        // Mock the connectDB function to prevent it from being called during tests
-    jest.mock('./config/db', () => () => {
-        console.log('✅ Mocking database connection for tests.');
-    });
 
     mongo = await MongoMemoryServer.create();
     const url = mongo.getUri();
