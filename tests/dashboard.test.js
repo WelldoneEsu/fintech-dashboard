@@ -3,6 +3,8 @@ const app  = require('../app');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
+jest.mock('../config/db'); // Adjust the path based on your project structure
+
 describe('Dashboard Routes', () => {
   let token;
   
