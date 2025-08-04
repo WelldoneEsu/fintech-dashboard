@@ -1,31 +1,28 @@
-name: Run Tests on Push
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    services:
-      mongo:
-        image: mongo
-        ports:
-          - 27017:27017
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Tests
-        run: npm test
+name: Test and Deploy to Render 
+on: 
+push: 
+branches: [ main ] 
+pull_request: 
+branches: [ main ] 
+jobs: 
+test-and-deploy: 
+runs-on: ubuntu-latest 
+services: 
+mongo: 
+image: mongo 
+ports: 
+- 27017:27017
+steps: - name: Checkout code 
+uses: actions/checkout@v3 - name: Set up Node.js 
+uses: actions/setup-node@v3 
+with: 
+node-version: 18 - name: Install dependencies 
+run: npm install - name: Run tests 
+run: npm test - name: Install Render CLI 
+run: npm install -g render-cli - name: Deploy to Render (only if tests pass) 
+if: success() 
+env: 
+RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }} 
+run: render deploy service <your-service-id>
+    
+    
