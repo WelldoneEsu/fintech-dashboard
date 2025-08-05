@@ -10,6 +10,7 @@ describe('Transaction Routes', () => {
         const user = await User.create({ username: 'payme', password:'123456',
 balance: 1000 });
     userId = user._id;
+
     token = jwt.sign({ id: userId, role: user.role },
 process.env.JWT_SECRET);
     });
