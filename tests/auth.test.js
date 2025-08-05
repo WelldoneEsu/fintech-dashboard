@@ -2,8 +2,6 @@ const request = require('supertest');
 const app = require('../app');
 const User = require('../models/User');
 
-jest.mock('../config/db'); // Adjust the path based on your project structure
-
 describe('Auth Routes', () => {
     beforeEach(async () =>  {
         await User.create({ username: 'testuser', password: '123456' });  

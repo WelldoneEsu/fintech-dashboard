@@ -13,7 +13,5 @@ const connectDB = async () => {
     }
 };
 
-// __mocks__/config/db.js
-module.exports = jest.fn().mockResolvedValue(true); // Mock successful connection
 
 module.exports = connectDB;

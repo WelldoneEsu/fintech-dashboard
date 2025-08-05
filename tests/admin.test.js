@@ -4,8 +4,6 @@ const User = require('../models/User');
 const Transaction = require('../models/Transaction');
 const jwt = require('jsonwebtoken');
 
-jest.mock('../config/db'); // Adjust the path based on your project structure
-
 describe('Admin override Transaction,', () => {
     let adminToken, normalToken, transactionId;
 
