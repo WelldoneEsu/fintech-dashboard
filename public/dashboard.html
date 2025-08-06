@@ -11,7 +11,7 @@
 <div id="dashboard"></div>
 <button onclick="logout()">Logout</button>
 <script>
-    const API  = 'http://localhost:5000/api';
+    const API  = 'https://fintech-dashboard-production-e9b2.up.railway.app/';
     // Get token from localStorage
     const token = localStorage.getItem('token');
 
@@ -24,7 +24,7 @@ const res = await fetch(`${API}/dashboard`, {
 const data = await res.json();
 
 const imageTag = data.profileImage
-  ? `<img src="http://localhost:5000/${data.profileImage}" width="150"/>`
+  ? `<img src="https://fintech-dashboard-production-e9b2.up.railway.app/${data.profileImage}" width="150"/>`
   : '<p> No profile image uploaded</p>';
 
     document.getElementById('dashboard').innerHTML = `
