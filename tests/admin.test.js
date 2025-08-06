@@ -48,7 +48,7 @@ describe('Admin override Transaction,', () => {
                 balanceAfter: 1999
                 });
            
-            expect(res.statusCode).toBe(200);
+            expect(res.statusCode).toBe(403);
             expect(res.body.message).toBe('Forbidden: Insufficient role permissions');
 
         });
