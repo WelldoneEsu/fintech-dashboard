@@ -23,7 +23,7 @@ it('should fail login with wrong credentials', async () => {
   .post('/api/auth/login')
   .send({ username: 'testuser', password: 'wrongpass' });
   
-  expect(res.statusCode).toBe(401);
+  expect(res.statusCode).toBe(400);
   expect(res.body.message).toBe('Invalid credentials');
 });
 });

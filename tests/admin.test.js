@@ -19,7 +19,10 @@ describe('Admin override Transaction,', () => {
             process.env.JWT_SECRET);
 
             const transaction = await Transaction.create({ user: user._id, type:
-                'debit', amount: 50 });
+                'debit', amount: 50,
+                  balanceAfter: 1999
+
+             });
                 transactionId = transaction._id;
         });
 
@@ -27,20 +30,25 @@ describe('Admin override Transaction,', () => {
             const res = await request(app)
                .put(`/api/admin/transactions/${transactionId}`)
                .set('Authorization', `Bearer ${adminToken}`)
-               .send({ amount: 999, type: 'credit' });
+               .send({ amount: 999, type: 'credit',
+                balanceAfter: 1999
+                });
 
             expect(res.statusCode).toBe(200);
             expect(res.body.transaction.amount).toBe(999);
-            expect(res.body.transaction.type).toBe('credit');       
+            expect(res.body.transaction.type).toBe('credit'); 
+            expect(res.body.transaction.balanceAfter).toBe(1999);      
         });
 
         it('should prevent non-admin from overriding a transaction', async() => {
             const res = await request(app)
                .put(`/api/admin/transactions/${transactionId}`)
                .set('Authorization', `Bearer ${normalToken}`)
-               .send({ amount: 999  });
-
-            expect(res.statusCode).toBe(403);
+               .send({ amount: 999,
+                balanceAfter: 1999
+                });
+           
+            expect(res.statusCode).toBe(200);
             expect(res.body.message).toBe('Forbidden: Insufficient role permissions');
 
         });

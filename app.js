@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
 // Load environment variables as early as possible
-dotenv.config(); 
+dotenv.config();
+// Connect DB first
+//connectDB(); 
 
 const connectDB = require('./config/db');
 const cors = require('cors');
@@ -13,8 +15,6 @@ const adminRoutes = require('./routes/adminRoutes');
 const profileRoutes = require('./routes/profileRoutes'); 
 const errorHandler = require('./middlewares/errorHandler');
 const { swaggerUi, swaggerSpec } = require('./swagger');
-// Connect DB
-connectDB();
 
 //only allow frontend from a specific domain
 const allowedOrigins = [
@@ -63,4 +63,5 @@ app.use('/api', dashboardRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use(errorHandler);
+
 module.exports = app;
