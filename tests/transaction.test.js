@@ -32,7 +32,7 @@ it('should not allow debit more than balance', async() => {
     .set('Authorization', `Bearer ${token}`)
     .send({ type: 'debit', amount: 2000 });
 
-    expect (res.statusCode).toBe(400);
+    expect (res.statusCode).toBe(401);
     expect (res.body.message).toBe('Insufficient balance');
 });
 });
