@@ -6,6 +6,8 @@ node_modules
 #ENV
 .env
 
+.env.example
+
 
 #uploaded images/videos
 uploads/

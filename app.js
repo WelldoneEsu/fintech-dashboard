@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 // Load environment variables as early as possible
 dotenv.config();
 // Connect DB first
-//connectDB(); 
+connectDB(); 
 
 const connectDB = require('./config/db');
 const cors = require('cors');

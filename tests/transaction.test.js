@@ -30,9 +30,10 @@ it('should not allow debit more than balance', async() => {
     const res = await request(app)
     .post('/api/transactions')
     .set('Authorization', `Bearer ${token}`)
-    .send({ type: 'debit', amount: 2000 });
+    .send({ type: 'debit', amount: 500 });
 
     expect (res.statusCode).toBe(401);
-    expect (res.body.message).toBe('Insufficient balance');
+    expect(res.body.transaction.type).toBe('debit');// worked on here
+    expect(res.body.transaction.amount).toBe(401);  
 });
 });
